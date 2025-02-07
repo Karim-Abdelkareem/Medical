@@ -1,4 +1,4 @@
-import AppError from "../utils/appError.js";
+import AppError from "../utils/AppError.js";
 
 // Handle MongoDB CastError (invalid ID)
 const handleCastError = (err) => {

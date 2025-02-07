@@ -1,6 +1,6 @@
 import express from "express";
 import AppError from "./utils/AppError.js";
-import globalErrorHandler from "./controllers/errorController.js";
+import globalErrorHandler from "./controllers/error.controller.js";
 import dotenv from "dotenv";
 import dbconnection from "./database/DBconnection.js";
 import userRouter from "./routes/userRouter.js";

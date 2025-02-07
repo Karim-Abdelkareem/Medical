@@ -1,5 +1,5 @@
 import express from "express";
-import * as userController from "../controllers/userController.js";
+import * as userController from "../controllers/user.controller.js";
 import { protectedRoutes, restrictedTo } from "../middleware/authorization.js";
 
 const router = express.Router();
