@@ -3,7 +3,6 @@ import AppError from "../utils/AppError.js";
 import jwt from "jsonwebtoken";
 import { userModel } from "../database/models/user.model.js";
 import { promisify } from "util";
-import { log } from "console";
 
 export const protectedRoutes = catchAsync(async (req, res, next) => {
   let { authorization } = req.headers;
@@ -23,6 +22,7 @@ export const protectedRoutes = catchAsync(async (req, res, next) => {
   }
 
   req.user = user;
+
   next();
 });
 
