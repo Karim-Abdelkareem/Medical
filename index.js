@@ -20,6 +20,7 @@ dotenv.config();
 app.use(express.json());
 
 // Routers for different routes
+app.get("/", (req, res) => res.send("Wellcome! To Medical API"));
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/product", productRouter);
