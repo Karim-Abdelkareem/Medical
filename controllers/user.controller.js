@@ -1,5 +1,6 @@
 import { userModel } from "../database/models/user.model.js";
 import catchAsync from "../utils/catchAsync.js";
+import AppError from "../utils/AppError.js";
 
 export const createUser = catchAsync(async (req, res, next) => {
   let user = await userModel.findOne({ email: req.body.email });
