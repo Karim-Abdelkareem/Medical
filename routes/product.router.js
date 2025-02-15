@@ -1,6 +1,7 @@
 import express from "express";
 import * as productController from "../controllers/product.controller.js";
 import { protectedRoutes, restrictedTo } from "../middleware/authorization.js";
+import upload from "../middleware/multer.js";
 
 const router = express.Router();
 // @desc    Get all products
@@ -18,7 +19,8 @@ router
   .route("/")
   .post(
     protectedRoutes,
-    restrictedTo("admin"),
+    restrictedTo("admin", "user"),
+    upload.single("image"),
     productController.createProduct
   );
 

@@ -4,13 +4,16 @@ import jwt from "jsonwebtoken";
 import { userModel } from "../database/models/user.model.js";
 import { promisify } from "util";
 
+
 export const protectedRoutes = catchAsync(async (req, res, next) => {
   let { authorization } = req.headers;
+
   if (!authorization) {
     return next(
       new AppError(401, "You are not authorized to access this route")
     );
   }
+
   const decoded = await promisify(jwt.verify)(
     authorization,
     process.env.JWT_SECRET

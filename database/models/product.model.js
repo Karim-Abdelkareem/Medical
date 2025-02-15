@@ -23,6 +23,9 @@ const productSchema = new mongoose.Schema({
     required: [true, "Product quantity is required"],
     min: 0,
   },
+  image: {
+    type: String,
+  },
 });
 
 export default mongoose.model("Product", productSchema);

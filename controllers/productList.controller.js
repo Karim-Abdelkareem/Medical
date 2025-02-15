@@ -27,11 +27,16 @@ export const addToProductList = catchAsync(async (req, res, next) => {
   );
 
   if (existingProduct) {
-    existingProduct.quantity += quantity;
+    existingProduct.quantity += 1;
   } else {
-    productList.productList.push({ productId, quantity });
+    productList.productList.push({
+      productId,
+      quantity,
+    });
   }
+
   await productList.save();
+
   res.json({
     status: "success",
     message: "Product added to product list successfully",

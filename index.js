@@ -1,5 +1,8 @@
 import express from "express";
 import AppError from "./utils/AppError.js";
+import multer from "multer";
+
+import cors from "cors";
 import globalErrorHandler from "./controllers/error.controller.js";
 import dotenv from "dotenv";
 import dbconnection from "./database/DBconnection.js";
@@ -7,6 +10,7 @@ import userRouter from "./routes/userRouter.js";
 import authRouter from "./routes/auth.router.js";
 import productRouter from "./routes/product.router.js";
 import productListRouter from "./routes/productList.router.js";
+import cartRouter from "./routes/cart.router.js";
 
 // Handle uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -16,8 +20,11 @@ process.on("uncaughtException", (err) => {
 });
 
 const app = express();
-dotenv.config();
+app.use(cors());
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+dotenv.config();
 
 // Routers for different routes
 app.get("/", (req, res) => res.send("Wellcome! To Medical API"));
@@ -25,6 +32,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/product", productRouter);
 app.use("/api/v1/productList", productListRouter);
+app.use("/api/v1/cart", cartRouter);
 
 // Handle all unknown routes
 app.all("*", (req, res, next) => {
