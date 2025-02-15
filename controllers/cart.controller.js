@@ -38,7 +38,7 @@ export const addToCart = catchAsync(async (req, res, next) => {
     );
 
     if (existingItem) {
-      existingItem.quantity += quantity;
+      parseInt(existingItem.quantity) += parseInt(quantity);
     } else {
       cart.items.push({ product: product._id, quantity, price: product.price });
     }
