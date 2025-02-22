@@ -46,5 +46,6 @@ export const login = catchAsync(async (req, res, next) => {
   res.json({
     status: "success",
     token,
+    user,
   });
 });
