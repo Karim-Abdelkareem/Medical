@@ -26,7 +26,6 @@ export const addToCart = catchAsync(async (req, res, next) => {
   }
 
   let cart = await Cart.findOne({ user: req.user._id });
-
   if (!cart) {
     cart = new Cart({
       user: req.user._id,
