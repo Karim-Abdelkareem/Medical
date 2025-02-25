@@ -80,7 +80,7 @@ export const removeFromCart = catchAsync(async (req, res, next) => {
 export const getCart = catchAsync(async (req, res) => {
   const cart = await Cart.findOne({ user: req.user._id }).populate(
     "items.product",
-    "-quantity -__v"
+    "-__v"
   );
   if (!cart) {
     return res
