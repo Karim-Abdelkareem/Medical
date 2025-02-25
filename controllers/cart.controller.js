@@ -45,9 +45,12 @@ export const addToCart = catchAsync(async (req, res, next) => {
 
   // Calculate and update total price
   calculateTotal(cart);
+
   await cart.save();
 
-  res.status(200).json({ message: "success", cart });
+  res
+    .status(200)
+    .json({ message: "success", cart, ItemsNumber: cart.items.length });
 });
 
 export const removeFromCart = catchAsync(async (req, res, next) => {
@@ -74,7 +77,9 @@ export const removeFromCart = catchAsync(async (req, res, next) => {
   calculateTotal(cart);
   await cart.save();
 
-  res.status(200).json({ message: "success", cart });
+  res
+    .status(200)
+    .json({ message: "success", cart, ItemsNumber: cart.items.length });
 });
 
 export const getCart = catchAsync(async (req, res) => {
@@ -87,5 +92,7 @@ export const getCart = catchAsync(async (req, res) => {
       .status(200)
       .json({ userId: req.user._id, items: [], totalPrice: 0 });
   }
-  res.status(200).json({ message: "success", cart });
+  res
+    .status(200)
+    .json({ message: "success", cart, ItemsNumber: cart.items.length });
 });
