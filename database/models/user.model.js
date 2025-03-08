@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin", "hr"],
       default: "user",
     },
+    debt: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );

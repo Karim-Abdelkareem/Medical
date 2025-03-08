@@ -2,12 +2,29 @@ import catchAsync from "../utils/catchAsync.js";
 import AppError from "../utils/AppError.js";
 import productModel from "../database/models/product.model.js";
 import cloudinary from "../utils/cloudinary.js";
+import Features from "../utils/Features.js";
 
 export const getAllProducts = catchAsync(async (req, res, next) => {
-  const products = await productModel.find();
+  let features = new Features(productModel.find(), req.query)
+    .pagination()
+    .filter()
+    .sort()
+    .search()
+    .fields();
+  let result = await features.mongooseQuery;
+  let hasNextPage = result.length === 20;
+  if (hasNextPage) {
+    return res.status(200).json({
+      status: "success",
+      page: features.page,
+      nextPage: features.page + 1,
+      data: result,
+    });
+  }
   res.json({
     status: "success",
-    data: products,
+    page: features.page,
+    data: result,
   });
 });
 

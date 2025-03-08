@@ -68,11 +68,7 @@ export const removeFromCart = catchAsync(async (req, res, next) => {
     return next(new AppError(404, "Item not found in the cart"));
   }
 
-  if (cart.items[itemIndex].quantity > 1) {
-    cart.items[itemIndex].quantity -= 1;
-  } else {
-    cart.items.splice(itemIndex, 1);
-  }
+  cart.items.splice(itemIndex, 1);
 
   calculateTotal(cart);
   await cart.save();
@@ -96,3 +92,18 @@ export const getCart = catchAsync(async (req, res) => {
     .status(200)
     .json({ message: "success", cart, ItemsNumber: cart.items.length });
 });
+
+// export const deleteFromCart = catchAsync(async (req, res, next) => {
+//   let cart = await Cart.findOne({ user: req.user._id });
+//   let itemIndex = cart.items.findIndex((item) =>
+//     item.product.equals(req.params.itemId)
+//   );
+//   if (itemIndex === -1) {
+//     return next(new AppError(404, "Item not found in the cart"));
+//   }
+//   cart.items.splice(itemIndex, 1);
+//   await cart.save();
+//   res
+//     .status(200)
+//     .json({ message: "success", cart, ItemsNumber: cart.items.length });
+// });
